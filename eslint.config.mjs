@@ -41,7 +41,18 @@ export default tseslint.config(
         {
           patterns: [
             {
-              group: ['**/core/**', '../core/**', '../../core/**', '**/features/**', '../features/**', '../../features/**'],
+              group: [
+                'src/app/core/**',
+                '**/app/core/**',
+                '../core/**',
+                '../../core/**',
+                '../../../core/**',
+                'src/app/features/**',
+                '**/app/features/**',
+                '../features/**',
+                '../../features/**',
+                '../../../features/**',
+              ],
               message: 'Boundary violation (ADR 005): shared/ tidak boleh mengimpor dari core/ atau features/.',
             },
           ],
