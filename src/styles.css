@@ -1,4 +1,5 @@
 @import 'tailwindcss';
+@plugin "tailwindcss-animate";
 
 @font-face {
   font-family: 'Bricolage Grotesque';
@@ -24,21 +25,10 @@
   src: url('/fonts/jetbrains-mono.woff2') format('woff2');
 }
 
-@theme {
-  --font-sans: 'Plus Jakarta Sans', system-ui, -apple-system, sans-serif;
-  --font-display: 'Bricolage Grotesque', 'Plus Jakarta Sans', system-ui, sans-serif;
-  --font-mono: 'JetBrains Mono', ui-monospace, SFMono-Regular, monospace;
-
-  --color-bg-page: var(--bg-page);
-  --color-bg-surface: var(--bg-surface);
-  --color-bg-elevated: var(--bg-elevated);
-  --color-bg-subtle: var(--bg-subtle);
-  --color-accent: var(--accent);
-  --color-credit: var(--credit);
-  --color-debit: var(--debit);
-}
-
 :root {
+  --radius: 0.75rem;
+
+  /* Saku.in final tokens (pure black, white text, one pale-gold accent) */
   --bg-page: #000000;
   --bg-surface: #060606;
   --bg-elevated: #0e0e0e;
@@ -46,7 +36,7 @@
   --text-primary: #ffffff;
   --text-secondary: #e6e6e6;
   --text-muted: #bdbdbd;
-  --accent: #cfc08a;
+  --accent-gold: #cfc08a;
   --accent-bright: #cfc08a;
   --accent-ink: #0b0903;
   --accent-soft: rgba(207, 192, 138, 0.1);
@@ -63,7 +53,78 @@
   --spotlight: rgba(207, 192, 138, 0.1);
   --btn-grad: linear-gradient(135deg, #d6c894 0%, #c2b27b 100%);
   --hero-grad: linear-gradient(135deg, #0a0a0a 0%, #131313 60%, #1c1a12 100%);
+
+  /* Zard UI semantic tokens mapped to Saku.in palette */
+  --background: var(--bg-page);
+  --foreground: var(--text-primary);
+  --card: var(--bg-surface);
+  --card-foreground: var(--text-primary);
+  --popover: var(--bg-elevated);
+  --popover-foreground: var(--text-primary);
+  --primary: var(--accent-gold);
+  --primary-foreground: var(--accent-ink);
+  --secondary: var(--bg-elevated);
+  --secondary-foreground: var(--text-primary);
+  --muted: var(--bg-subtle);
+  --muted-foreground: var(--text-muted);
+  --accent: var(--accent-gold);
+  --accent-foreground: var(--accent-ink);
+  --destructive: var(--debit);
+  --destructive-foreground: #000000;
+  --border: var(--border-hairline);
+  --input: var(--border-hairline);
+  --ring: var(--focus-ring);
+
+  --sidebar: #000000;
+  --sidebar-foreground: #ffffff;
+  --sidebar-primary: #b3dee2;
+  --sidebar-primary-foreground: #04141a;
+  --sidebar-accent: rgba(179, 222, 226, 0.16);
+  --sidebar-accent-foreground: #ffffff;
+  --sidebar-border: rgba(255, 255, 255, 0.14);
+  --sidebar-ring: #b3dee2;
+
   color-scheme: dark;
+}
+
+@theme inline {
+  --font-sans: 'Plus Jakarta Sans', system-ui, -apple-system, sans-serif;
+  --font-display: 'Bricolage Grotesque', 'Plus Jakarta Sans', system-ui, sans-serif;
+  --font-mono: 'JetBrains Mono', ui-monospace, SFMono-Regular, monospace;
+
+  --color-background: var(--background);
+  --color-foreground: var(--foreground);
+  --color-card: var(--card);
+  --color-card-foreground: var(--card-foreground);
+  --color-popover: var(--popover);
+  --color-popover-foreground: var(--popover-foreground);
+  --color-primary: var(--primary);
+  --color-primary-foreground: var(--primary-foreground);
+  --color-secondary: var(--secondary);
+  --color-secondary-foreground: var(--secondary-foreground);
+  --color-muted: var(--muted);
+  --color-muted-foreground: var(--muted-foreground);
+  --color-accent: var(--accent);
+  --color-accent-foreground: var(--accent-foreground);
+  --color-destructive: var(--destructive);
+  --color-destructive-foreground: var(--destructive-foreground);
+  --color-border: var(--border);
+  --color-input: var(--input);
+  --color-ring: var(--ring);
+
+  --radius-sm: calc(var(--radius) - 4px);
+  --radius-md: calc(var(--radius) - 2px);
+  --radius-lg: var(--radius);
+  --radius-xl: calc(var(--radius) + 4px);
+
+  --color-sidebar: var(--sidebar);
+  --color-sidebar-foreground: var(--sidebar-foreground);
+  --color-sidebar-primary: var(--sidebar-primary);
+  --color-sidebar-primary-foreground: var(--sidebar-primary-foreground);
+  --color-sidebar-accent: var(--sidebar-accent);
+  --color-sidebar-accent-foreground: var(--sidebar-accent-foreground);
+  --color-sidebar-border: var(--sidebar-border);
+  --color-sidebar-ring: var(--sidebar-ring);
 }
 
 /* Sidebar local override: pure black, white text, aqua accent */
@@ -99,6 +160,7 @@ aside.sidebar-collapsed .nav-item-link {
 
 @layer base {
   * {
+    @apply border-border outline-ring/50;
     box-sizing: border-box;
   }
 
@@ -111,6 +173,17 @@ aside.sidebar-collapsed .nav-item-link {
     margin: 0;
     padding: 0;
     overflow-x: clip;
+  }
+
+  input[type='number']::-webkit-inner-spin-button,
+  input[type='number']::-webkit-outer-spin-button {
+    -webkit-appearance: none;
+    margin: 0;
+  }
+
+  input[type='number'] {
+    -moz-appearance: textfield;
+    appearance: textfield;
   }
 }
 
